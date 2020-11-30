@@ -1,0 +1,12 @@
+{
+  "name": "public-restaurant-map",
+  "displayName": "public-restaurant-map",
+  "expo": {
+    "name": "public-restaurant-map",
+    "slug": "public-restaurant-map",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
