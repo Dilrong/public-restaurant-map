@@ -3153,6 +3153,11 @@ expect@^25.5.0:
     jest-message-util "^25.5.0"
     jest-regex-util "^25.2.6"
 
+expo-ads-admob@~8.3.0:
+  version "8.3.0"
+  resolved "https://registry.yarnpkg.com/expo-ads-admob/-/expo-ads-admob-8.3.0.tgz#d088b63f0c4b63e20dbddcff4a6e90d00a5e700e"
+  integrity sha512-iY2QzncsSnIxloZw7aLaRuSMwGE3fih06ha4AgqI2VUlLBwGLdGrcmt6VEKOm9aFGZo+hOYJJBfE8lvzc5P0rQ==
+
 expo-asset@~8.2.0:
   version "8.2.0"
   resolved "https://registry.yarnpkg.com/expo-asset/-/expo-asset-8.2.0.tgz#2f72491064c02d4de32e9187d474deb9cec33003"

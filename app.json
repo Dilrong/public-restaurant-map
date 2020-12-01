@@ -1,10 +1,10 @@
 {
   "name": "public-restaurant-map",
-  "displayName": "public-restaurant-map",
+  "displayName": "공맛지",
   "expo": {
     "name": "public-restaurant-map",
     "slug": "public-restaurant-map",
-    "version": "1.0.0",
+    "version": "1.5.0",
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -14,7 +14,11 @@
       "backgroundColor": "#182026"
     },
     "android": {
-      "package": "com.dilrong.publicrestaurantmap"
+      "package": "com.dilrong.restaurantmap",
+      "versionCode": 7,
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-5210543205621832~8720597939"
+      }
     }
   }
 }
