@@ -1,14 +1,15 @@
 import React, { useState, useEffect} from 'react';
-import { StyleSheet, Text, SafeAreaView, TouchableOpacity, Platform, FlatList, View, Image } from 'react-native';
-import { SCALE_16, SCALE_8, SCALE_4 } from '_styles/spacing'
+import { StyleSheet, Text, SafeAreaView, TouchableOpacity, Platform, FlatList, View, Image, Linking } from 'react-native';
+import { SCALE_8, SCALE_4 } from '_styles/spacing'
 import { H6, CAPTION } from '_styles/typography'
 import { scaleSize } from '_styles/mixins'
-import { PRIMARY, GRAY_DARK } from '_styles/colors'
+import { GRAY_DARK } from '_styles/colors'
+import BASE_URL from '_utils/api'
 import Axios from 'axios';
 
 const ListItem = ({ item }) => {
     return (
-        <TouchableOpacity style={styles.item}>
+        <TouchableOpacity style={styles.item} onPress={() => {Linking.openURL(item.fields.URL)}}>
             <View style={styles.itemWrap}>
                 <Image style={styles.itemImage} source={{uri: item.fields.Image }}/>
                 <View>
@@ -25,17 +26,23 @@ const renderItem = ({ item }) => <ListItem item={item}/>;
 
 const ListScreen = ({navigation}) => {
     const [rows, setRows] = useState([])
+    const [isLoading, setLoading] = useState(true)
 
     useEffect(() => {
-        Axios.get("https://api.airtable.com/v0/appiQGv4bZRpA1GnH/Category?api_key=keyXGbMKu4hxmnPjr")
+        Axios.get(BASE_URL)
         .then((res) => {
             setRows(res.data.records)
+            setLoading(false)
+        }).catch(err => {
+          console.log(err)
+          setLoading(false)
         })
     })
     return (
         <SafeAreaView style={styles.container}>
             <Text style={styles.title}>카테고리</Text>
-            <FlatList data={rows} renderItem={renderItem} keyExtractor={item => item.id}/>
+            {isLoading? <Text style={styles.itemComment}>맛집 찾는 중</Text>:
+            <FlatList data={rows} renderItem={renderItem} keyExtractor={item => item.id}/>}
         </SafeAreaView>
     )
 }

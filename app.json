@@ -7,6 +7,14 @@
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "splash": {
+      "image": "./src/assets/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#182026"
+    },
+    "android": {
+      "package": "com.dilrong.publicrestaurantmap"
+    }
   }
 }
