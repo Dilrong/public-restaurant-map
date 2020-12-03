@@ -7,7 +7,7 @@ import { AdMobBanner } from 'expo-ads-admob';
 const RootNavigator = () => (
     <NavigationContainer>
         <AppNavigator/>
-        <AdMobBanner bannerSize="fullBanner" adUnitID="ca-app-pub-3940256099942544/6300978111" servePersonalizedAds onDidFailToReceiveAdWithError={this.bannerError} />
+        <AdMobBanner bannerSize="fullBanner" adUnitID="ca-app-pub-5210543205621832/3516624320" onDidFailToReceiveAdWithError={this.bannerError} />
     </NavigationContainer>
 )
 

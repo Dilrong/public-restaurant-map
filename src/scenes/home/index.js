@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, SafeAreaView, Platform, Image, View, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, SafeAreaView, Platform, Image, View, FlatList, TouchableOpacity, StatusBar, Linking } from 'react-native';
 import { H6, CAPTION } from '_styles/typography'
 import { SCALE_8 } from '_styles/spacing'
 import { scaleSize } from '_styles/mixins'
@@ -22,21 +22,25 @@ const renderItem = ({ item }) => <FeedItem item={item}/>;
 
 const HomeScreen = ({navigation}) => {
   const [rows, setRows] = useState([])
+  const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
     Axios.get("https://api.airtable.com/v0/appiQGv4bZRpA1GnH/Feed?api_key=keyXGbMKu4hxmnPjr")
     .then(res => {
       setRows(res.data.records)
+      setLoading(false)
     })
     .catch(err => {
       console.log(err)
+      setLoading(false)
     })
   })
 
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>홈</Text>
-      <FlatList data={rows} renderItem={renderItem} keyExtractor={item => item.id}/>
+      {isLoading? <Text style={styles.itemComment}>당신을 추천 콘텐츠 찾는 중</Text>:
+      <FlatList data={rows} renderItem={renderItem} keyExtractor={item => item.id}/>}
     </SafeAreaView>
   )
 }
@@ -65,6 +69,8 @@ const styles = StyleSheet.create({
   },
   feedImg: {
     width: '100%',
+    borderTopLeftRadius: scaleSize(10),
+    borderTopRightRadius: scaleSize(10),
     height: scaleSize(150),
     padding: SCALE_8
   },
@@ -73,10 +79,12 @@ const styles = StyleSheet.create({
   },
   feedTitle: {
     fontSize: H6,
-    marginBottom: SCALE_8
+    marginBottom: SCALE_8,
+    fontWeight: "bold"
   },
   feedContent: {
-    marginBottom: SCALE_8
+    marginBottom: SCALE_8,
+    color: GRAY_DARK
   },
   feedTime: {
     fontSize: CAPTION,

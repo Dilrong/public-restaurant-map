@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from 'react';
-import { StyleSheet, Text, SafeAreaView, TouchableOpacity, Platform, FlatList, View, Image, Linking } from 'react-native';
+import { StyleSheet, Text, SafeAreaView, TouchableOpacity, Platform, FlatList, View, Image, Linking, StatusBar } from 'react-native';
 import { SCALE_8, SCALE_4 } from '_styles/spacing'
 import { H6, CAPTION } from '_styles/typography'
 import { scaleSize } from '_styles/mixins'

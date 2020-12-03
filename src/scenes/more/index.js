@@ -7,7 +7,7 @@ import Axios from 'axios'
 
 const Profile = () => (
   <View style={styles.profile}>
-    <Image style={styles.profile_img} source={require('../../assets/logo.png')}/>
+    <Image style={styles.profile_img} source={require('../../assets/icon.png')}/>
     <Text>모두를 위한 맛집 지도</Text>
     <Text style={styles.profile_name}>공맛지</Text>
   </View>

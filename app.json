@@ -1,13 +1,15 @@
 {
-  "name": "public-restaurant-map",
+  "name": "공맛지",
   "displayName": "공맛지",
   "expo": {
-    "name": "public-restaurant-map",
+    "name": "공맛지",
     "slug": "public-restaurant-map",
-    "version": "1.5.0",
+    "version": "1.5.1",
+    "orientation": "portrait",
     "assetBundlePatterns": [
       "**/*"
     ],
+    "icon": "./src/assets/icon.png",
     "splash": {
       "image": "./src/assets/splash.png",
       "resizeMode": "cover",
@@ -15,7 +17,7 @@
     },
     "android": {
       "package": "com.dilrong.restaurantmap",
-      "versionCode": 7,
+      "versionCode": 8,
       "config": {
         "googleMobileAdsAppId": "ca-app-pub-5210543205621832~8720597939"
       }

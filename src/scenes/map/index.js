@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, SafeAreaView, Platform, Text, Dimensions, Linking } from 'react-native';
+import { StyleSheet, SafeAreaView, Platform, Text, Dimensions, Linking, StatusBar, TouchableOpacity } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import MapView, { PROVIDER_GOOGLE, Marker, Callout } from 'react-native-maps';
 import { GRAY_DARK } from '_styles/colors'
 import { SCALE_8, SCALE_4 } from '_styles/spacing'
@@ -12,8 +13,8 @@ const MapMarker = (marker, index) => (
     key={index}
     image={require('../../assets/pin.png')}
     coordinate={{
-      latitude: marker.marker.latitude,
-      longitude: marker.marker.longitude
+      latitude: Number(marker.marker.latitude),
+      longitude: Number(marker.marker.longitude)
     }}
   >
     <Callout
@@ -42,10 +43,14 @@ const MapScreen = ({navigation}) => {
     <SafeAreaView style={styles.container}>
       <Text></Text>
         <MapView 
-          style={styles.mapStyle}
+          style={{
+            ...StyleSheet.absoluteFillObject,
+            marginBottom: 1
+          }}
           provider={PROVIDER_GOOGLE}
-          showsMyLocationButton={true}
+          showsMyLocationButton
           showsUserLocation
+          showsCompass
           initialRegion={{
             latitude: 36.464496,
             longitude: 127.768667,
@@ -64,14 +69,7 @@ const MapScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  mapStyle: {
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
   },
   callout: {
     alignItems: 'center',
