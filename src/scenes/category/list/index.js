@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import { StyleSheet, Text, SafeAreaView, TouchableOpacity, Platform, FlatList, View, Image, Linking, StatusBar } from 'react-native';
 import { SCALE_8, SCALE_4 } from '_styles/spacing'
-import { H6, CAPTION } from '_styles/typography'
+import { H6, BODY1, CAPTION } from '_styles/typography'
 import { scaleSize } from '_styles/mixins'
 import { GRAY_DARK } from '_styles/colors'
 import BASE_URL from '_utils/api'
@@ -41,7 +41,7 @@ const ListScreen = ({navigation}) => {
     return (
         <SafeAreaView style={styles.container}>
             <Text style={styles.title}>카테고리</Text>
-            {isLoading? <Text style={styles.itemComment}>맛집 찾는 중</Text>:
+            {isLoading? <Text style={styles.loader}>맛집 찾는 중</Text>:
             <FlatList data={rows} renderItem={renderItem} keyExtractor={item => item.id}/>}
         </SafeAreaView>
     )
@@ -57,6 +57,10 @@ const styles = StyleSheet.create({
     width: "100%",
     margin: SCALE_8,
     fontSize: H6
+  },
+  loader: {
+    margin: SCALE_8,
+    fontSize: BODY1
   },
   item: {
     margin: SCALE_8,

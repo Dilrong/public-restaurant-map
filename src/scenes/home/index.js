@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, SafeAreaView, Platform, Image, View, FlatList, TouchableOpacity, StatusBar, Linking } from 'react-native';
-import { H6, CAPTION } from '_styles/typography'
+import { H6, BODY1, CAPTION } from '_styles/typography'
 import { SCALE_8 } from '_styles/spacing'
 import { scaleSize } from '_styles/mixins'
 import { GRAY_DARK } from '_styles/colors'
@@ -39,7 +39,7 @@ const HomeScreen = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>홈</Text>
-      {isLoading? <Text style={styles.itemComment}>당신을 추천 콘텐츠 찾는 중</Text>:
+      {isLoading? <Text style={styles.loader}>당신을 추천 콘텐츠 찾는 중</Text>:
       <FlatList data={rows} renderItem={renderItem} keyExtractor={item => item.id}/>}
     </SafeAreaView>
   )
@@ -55,6 +55,10 @@ const styles = StyleSheet.create({
     width: "100%",
     margin: SCALE_8,
     fontSize: H6
+  },
+  loader: {
+    margin: SCALE_8,
+    fontSize: BODY1
   },
   carousel: {
     width: '100%',

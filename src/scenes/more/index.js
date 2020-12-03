@@ -1,5 +1,5 @@
 import React, { useState, useEffect}  from 'react';
-import { StyleSheet, Text, SafeAreaView, View, FlatList, TouchableOpacity, Image, StatusBar, Platform, Linking } from 'react-native';
+import { StyleSheet, Text, SafeAreaView, View, FlatList, TouchableOpacity, Image, StatusBar, Platform, Linking, Share } from 'react-native';
 import { H6, BODY1 } from '_styles/typography'
 import { SCALE_8 } from '_styles/spacing'
 import { scaleSize } from '_styles/mixins'
@@ -36,7 +36,16 @@ const MoreScreen = ({navigation}) => {
   return(
     <SafeAreaView style={styles.container}>
       <Profile/>
+      <TouchableOpacity style={styles.item} onPress={() => { 
+        Share.share({
+          title: '공맛지 - 공무원 업무 추진비를 활용한 맛집 지도',
+          message: 'https://play.google.com/store/apps/details?id=com.dilrong.restaurantmap'
+        })
+      }}>
+        <Text style={styles.title}>공유하기</Text>
+      <View style={styles.hr}/>
       <FlatList data={rows} renderItem={renderItem} keyExtractor={item => item.id}/>
+  </TouchableOpacity>
     </SafeAreaView>
   )
 }

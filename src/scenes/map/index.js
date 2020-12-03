@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, SafeAreaView, Platform, Text, Dimensions, Linking, StatusBar, TouchableOpacity } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { StyleSheet, SafeAreaView, Text, Linking, PermissionsAndroid } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Marker, Callout } from 'react-native-maps';
 import { GRAY_DARK } from '_styles/colors'
-import { SCALE_8, SCALE_4 } from '_styles/spacing'
-import { H6, CAPTION } from '_styles/typography'
+import { SCALE_4 } from '_styles/spacing'
+import { CAPTION } from '_styles/typography'
 import BASE_URL from '_utils/api'
 import Axios from 'axios';
 
@@ -29,6 +28,15 @@ const MapMarker = (marker, index) => (
 
 const MapScreen = ({navigation}) => {
   const [rows, setRows] = useState([])
+  const [mapWidth, setMapWidth] = useState('99%')
+
+  const updateMapStyle = () => {
+    setMapWidth('100%')
+  }
+
+  const requestGeoLocationPermission = () => {
+    PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION)
+  }
 
   useEffect(() => {
     Axios.get(BASE_URL)
@@ -41,16 +49,18 @@ const MapScreen = ({navigation}) => {
 
   return(
     <SafeAreaView style={styles.container}>
-      <Text></Text>
         <MapView 
-          style={{
-            ...StyleSheet.absoluteFillObject,
-            marginBottom: 1
-          }}
           provider={PROVIDER_GOOGLE}
-          showsMyLocationButton
-          showsUserLocation
-          showsCompass
+          mapType="standard"
+          customMapStyle={googleMapStyle}
+          style={[styles.map, { width: mapWidth }]}
+          showsUserLocation={true}
+          showsMyLocationButton={true}
+          showsCompass={true}
+          onMapReady={() => {
+            Platform.OS === "android" ? requestGeoLocationPermission() : false
+            updateMapStyle()
+          }}
           initialRegion={{
             latitude: 36.464496,
             longitude: 127.768667,
@@ -66,10 +76,23 @@ const MapScreen = ({navigation}) => {
   )
 }
 
+const googleMapStyle = [{
+  featureType: "administrative",
+  elementType: "geometry",
+  stylers: [{
+    visibility: "off"
+  }]
+}]
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+  },
+  map: {
+    height: '100%'
   },
   callout: {
     alignItems: 'center',

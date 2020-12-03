@@ -4,7 +4,7 @@
   "expo": {
     "name": "공맛지",
     "slug": "public-restaurant-map",
-    "version": "1.5.1",
+    "version": "1.5.2",
     "orientation": "portrait",
     "assetBundlePatterns": [
       "**/*"
@@ -17,9 +17,12 @@
     },
     "android": {
       "package": "com.dilrong.restaurantmap",
-      "versionCode": 8,
+      "versionCode": 9,
       "config": {
-        "googleMobileAdsAppId": "ca-app-pub-5210543205621832~8720597939"
+        "googleMobileAdsAppId": "ca-app-pub-5210543205621832~8720597939",
+        "googleMaps": {
+          "apiKey": "AIzaSyCGyJ86XbVuv-rKIggJzrZqZGWpe1PbDvI"
+        }
       }
     }
   }
