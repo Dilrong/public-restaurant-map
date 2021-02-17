@@ -1,32 +1,41 @@
 import React, { useState, useEffect} from 'react';
-import { StyleSheet, Text, SafeAreaView, TouchableOpacity, Platform, FlatList, View, Image, Linking, StatusBar } from 'react-native';
+import { StyleSheet, Text, SafeAreaView, TouchableOpacity, Platform, FlatList, View, Image, StatusBar } from 'react-native';
 import { SCALE_8, SCALE_4 } from '_styles/spacing'
 import { H6, BODY1, CAPTION } from '_styles/typography'
 import { scaleSize } from '_styles/mixins'
 import { GRAY_DARK } from '_styles/colors'
 import BASE_URL from '_utils/api'
+import Region from '_utils/constant'
 import Axios from 'axios';
-
-const ListItem = ({ item }) => {
-    return (
-        <TouchableOpacity style={styles.item} onPress={() => {Linking.openURL(item.fields.URL)}}>
-            <View style={styles.itemWrap}>
-                <Image style={styles.itemImage} source={{uri: item.fields.Image }}/>
-                <View>
-                    <Text style={styles.itemName}>{item.fields.Name}</Text>
-                    <Text style={styles.itemComment}>"{item.fields.Comment}"</Text>
-                    <Text style={styles.itemTag}>{item.fields.Tag}</Text>
-                </View>
-            </View>
-        </TouchableOpacity>
-    )
-}
-
-const renderItem = ({ item }) => <ListItem item={item}/>;
 
 const ListScreen = ({navigation}) => {
     const [rows, setRows] = useState([])
     const [isLoading, setLoading] = useState(true)
+
+    const ListItem = ({ item }) => {
+      return (
+          <TouchableOpacity style={styles.item} onPress={() => { navigation.navigate('detail', { uri: item.fields.URL }) }}>
+              <View style={styles.itemWrap}>
+                  <Image style={styles.itemImage} source={{uri: item.fields.Image }}/>
+                  <View>
+                      <Text style={styles.itemName}>{item.fields.Name}</Text>
+                      <Text style={styles.itemComment}>"{item.fields.Comment}"</Text>
+                      <Text style={styles.itemTag}>{item.fields.Tag}</Text>
+                  </View>
+              </View>
+          </TouchableOpacity>
+      )
+  }
+  
+  const renderItem = ({ item }) => <ListItem item={item}/>;
+  
+  const renderTag = ({ item }) => {
+    return (
+      <TouchableOpacity style={styles.tagWrap}>
+        <Text>{item}</Text>
+      </TouchableOpacity>
+    )
+  }
 
     useEffect(() => {
         Axios.get(BASE_URL)
@@ -37,10 +46,11 @@ const ListScreen = ({navigation}) => {
           console.log(err)
           setLoading(false)
         })
-    })
+    }, [])
     return (
         <SafeAreaView style={styles.container}>
             <Text style={styles.title}>카테고리</Text>
+            {/* <FlatList data={Region} renderItem={renderTag} keyExtractor={item => item.id} horizontal/> */}
             {isLoading? <Text style={styles.loader}>맛집 찾는 중</Text>:
             <FlatList data={rows} renderItem={renderItem} keyExtractor={item => item.id}/>}
         </SafeAreaView>
@@ -94,6 +104,15 @@ const styles = StyleSheet.create({
     fontSize: CAPTION,
     color: GRAY_DARK,
   },
+  tagWrap: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: SCALE_8,
+    margin: SCALE_4,
+    borderRadius: scaleSize(10),
+    borderWidth: scaleSize(0.5),
+    borderColor: '#d6d7da',
+  }
 });
 
 export default ListScreen;

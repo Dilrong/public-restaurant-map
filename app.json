@@ -4,7 +4,7 @@
   "expo": {
     "name": "공맛지",
     "slug": "public-restaurant-map",
-    "version": "1.5.2",
+    "version": "1.5.3",
     "orientation": "portrait",
     "assetBundlePatterns": [
       "**/*"
