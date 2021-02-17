@@ -17,7 +17,8 @@
     },
     "android": {
       "package": "com.dilrong.restaurantmap",
-      "versionCode": 9,
+      "googleServicesFile": "./google-services.json",
+      "versionCode": 10,
       "config": {
         "googleMobileAdsAppId": "ca-app-pub-5210543205621832~8720597939",
         "googleMaps": {

@@ -5,8 +5,8 @@ import { H6, BODY1, CAPTION } from '_styles/typography'
 import { scaleSize } from '_styles/mixins'
 import { GRAY_DARK } from '_styles/colors'
 import BASE_URL from '_utils/api'
-import Region from '_utils/constant'
 import Axios from 'axios';
+import * as Analytics from 'expo-firebase-analytics'; 
 
 const ListScreen = ({navigation}) => {
     const [rows, setRows] = useState([])
@@ -14,7 +14,10 @@ const ListScreen = ({navigation}) => {
 
     const ListItem = ({ item }) => {
       return (
-          <TouchableOpacity style={styles.item} onPress={() => { navigation.navigate('detail', { uri: item.fields.URL }) }}>
+          <TouchableOpacity style={styles.item} onPress={() => { 
+            navigation.navigate('detail', { uri: item.fields.URL }) 
+            Analytics.logEvent('click_list', { items: item.fields.Name });
+          }}>
               <View style={styles.itemWrap}>
                   <Image style={styles.itemImage} source={{uri: item.fields.Image }}/>
                   <View>

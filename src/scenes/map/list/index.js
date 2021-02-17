@@ -6,6 +6,7 @@ import { SCALE_8, SCALE_4 } from '_styles/spacing'
 import { BODY1, CAPTION } from '_styles/typography'
 import BASE_URL from '_utils/api'
 import Axios from 'axios';
+import * as Analytics from 'expo-firebase-analytics'; 
 
 const MapScreen = ({navigation}) => {
   const [rows, setRows] = useState([])
@@ -22,7 +23,10 @@ const MapScreen = ({navigation}) => {
     >
       <Callout
         style={styles.callout}
-        onPress={()=>{ navigation.navigate('detail', { uri: marker.marker.URL }) }}>
+        onPress={ ()=>{ 
+          navigation.navigate('detail', { uri: marker.marker.URL }) 
+          Analytics.logEvent('click_marker', { items: marker.marker.Name });
+        }}>
           <Text style={styles.name}>{marker.marker.Name}</Text>
           <Text style={styles.comment}>"{marker.marker.Comment}"</Text>
           <Text style={styles.address}>{marker.marker.Address}</Text>
@@ -47,6 +51,7 @@ const MapScreen = ({navigation}) => {
       console.log(err.message)
       setLoading(false)
     })
+    Analytics.logEvent('init_map');
   }
 
   useEffect(() => {

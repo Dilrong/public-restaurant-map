@@ -5,10 +5,14 @@ import { SCALE_8 } from '_styles/spacing'
 import { scaleSize } from '_styles/mixins'
 import { GRAY_DARK } from '_styles/colors'
 import Axios from 'axios'
+import * as Analytics from 'expo-firebase-analytics'
 
 const FeedItem = ({ item }) => {
   return (
-    <TouchableOpacity style={styles.feed} onPress={() => {Linking.openURL(item.fields.URL)}}>
+    <TouchableOpacity style={styles.feed} onPress={() => {
+      Linking.openURL(item.fields.URL)
+      Analytics.logEvent('click_feed', { item: item.fields.Title });  
+    }}>
     <Image style={styles.feedImg} source={{uri: item.fields.Image }}/>
     <View style={styles.feedContainer}>
       <Text style={styles.feedTitle}>{item.fields.Title}</Text>

@@ -4,6 +4,7 @@ import { H6, BODY1 } from '_styles/typography'
 import { SCALE_8 } from '_styles/spacing'
 import { scaleSize } from '_styles/mixins'
 import Axios from 'axios'
+import * as Analytics from 'expo-firebase-analytics'; 
 
 const Profile = () => (
   <View style={styles.profile}>
@@ -41,6 +42,7 @@ const MoreScreen = ({navigation}) => {
           title: '공맛지 - 공무원 업무 추진비를 활용한 맛집 지도',
           message: 'https://play.google.com/store/apps/details?id=com.dilrong.restaurantmap'
         })
+        Analytics.logEvent('share');  
       }}>
         <Text style={styles.title}>공유하기</Text>
       <View style={styles.hr}/>
