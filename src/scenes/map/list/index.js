@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, SafeAreaView, Text, Linking, PermissionsAndroid, Platform, StatusBar } from 'react-native';
+import { StyleSheet, SafeAreaView, Text, PermissionsAndroid, Platform, StatusBar } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Marker, Callout } from 'react-native-maps';
 import { GRAY_DARK } from '_styles/colors'
 import { SCALE_8, SCALE_4 } from '_styles/spacing'
